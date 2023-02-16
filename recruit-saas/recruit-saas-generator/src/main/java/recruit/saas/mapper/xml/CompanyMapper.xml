@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="recruit.saas.mapper.CompanyMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="recruit.saas.entity.Company">
+        <id column="id" property="id" />
+        <result column="company_name" property="companyName" />
+        <result column="short_name" property="shortName" />
+        <result column="logo" property="logo" />
+        <result column="biz_license" property="bizLicense" />
+        <result column="country" property="country" />
+        <result column="province" property="province" />
+        <result column="city" property="city" />
+        <result column="district" property="district" />
+        <result column="address" property="address" />
+        <result column="nature" property="nature" />
+        <result column="people_size" property="peopleSize" />
+        <result column="industry" property="industry" />
+        <result column="financ_stage" property="financStage" />
+        <result column="work_time" property="workTime" />
+        <result column="introduction" property="introduction" />
+        <result column="advantage" property="advantage" />
+        <result column="benefits" property="benefits" />
+        <result column="bonus" property="bonus" />
+        <result column="subsidy" property="subsidy" />
+        <result column="build_date" property="buildDate" />
+        <result column="regist_capital" property="registCapital" />
+        <result column="regist_place" property="registPlace" />
+        <result column="legal_representative" property="legalRepresentative" />
+        <result column="review_status" property="reviewStatus" />
+        <result column="review_replay" property="reviewReplay" />
+        <result column="auth_letter" property="authLetter" />
+        <result column="commit_user_id" property="commitUserId" />
+        <result column="commit_user_mobile" property="commitUserMobile" />
+        <result column="commit_date" property="commitDate" />
+        <result column="is_vip" property="isVip" />
+        <result column="vip_expire_date" property="vipExpireDate" />
+        <result column="created_time" property="createdTime" />
+        <result column="updated_time" property="updatedTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, company_name, short_name, logo, biz_license, country, province, city, district, address, nature, people_size, industry, financ_stage, work_time, introduction, advantage, benefits, bonus, subsidy, build_date, regist_capital, regist_place, legal_representative, review_status, review_replay, auth_letter, commit_user_id, commit_user_mobile, commit_date, is_vip, vip_expire_date, created_time, updated_time
+    </sql>
+
+</mapper>
