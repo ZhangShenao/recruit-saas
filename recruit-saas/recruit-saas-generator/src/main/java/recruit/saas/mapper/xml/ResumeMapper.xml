@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="recruit.saas.mapper.ResumeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="recruit.saas.entity.Resume">
+        <id column="id" property="id" />
+        <result column="user_id" property="userId" />
+        <result column="advantage" property="advantage" />
+        <result column="advantage_html" property="advantageHtml" />
+        <result column="credentials" property="credentials" />
+        <result column="skills" property="skills" />
+        <result column="status" property="status" />
+        <result column="refresh_time" property="refreshTime" />
+        <result column="create_time" property="createTime" />
+        <result column="updated_time" property="updatedTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id, advantage, advantage_html, credentials, skills, status, refresh_time, create_time, updated_time
+    </sql>
+
+</mapper>

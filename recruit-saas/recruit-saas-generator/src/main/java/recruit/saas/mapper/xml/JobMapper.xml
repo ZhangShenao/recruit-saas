@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="recruit.saas.mapper.JobMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="recruit.saas.entity.Job">
+        <id column="id" property="id" />
+        <result column="hr_id" property="hrId" />
+        <result column="company_id" property="companyId" />
+        <result column="job_name" property="jobName" />
+        <result column="job_type" property="jobType" />
+        <result column="exp_years" property="expYears" />
+        <result column="edu" property="edu" />
+        <result column="begin_salary" property="beginSalary" />
+        <result column="end_salary" property="endSalary" />
+        <result column="monthly_salary" property="monthlySalary" />
+        <result column="job_desc" property="jobDesc" />
+        <result column="tags" property="tags" />
+        <result column="city" property="city" />
+        <result column="address" property="address" />
+        <result column="status" property="status" />
+        <result column="violate_reason" property="violateReason" />
+        <result column="create_time" property="createTime" />
+        <result column="updated_time" property="updatedTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, hr_id, company_id, job_name, job_type, exp_years, edu, begin_salary, end_salary, monthly_salary, job_desc, tags, city, address, status, violate_reason, create_time, updated_time
+    </sql>
+
+</mapper>

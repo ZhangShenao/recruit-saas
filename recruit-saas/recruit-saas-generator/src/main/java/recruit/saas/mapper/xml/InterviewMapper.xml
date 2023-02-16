@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="recruit.saas.mapper.InterviewMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="recruit.saas.entity.Interview">
+        <id column="id" property="id" />
+        <result column="hr_user_id" property="hrUserId" />
+        <result column="company_id" property="companyId" />
+        <result column="cand_user_id" property="candUserId" />
+        <result column="job_id" property="jobId" />
+        <result column="job_name" property="jobName" />
+        <result column="interview_time" property="interviewTime" />
+        <result column="interview_address" property="interviewAddress" />
+        <result column="remark" property="remark" />
+        <result column="status" property="status" />
+        <result column="cand_name" property="candName" />
+        <result column="cand_face" property="candFace" />
+        <result column="cand_position" property="candPosition" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, hr_user_id, company_id, cand_user_id, job_id, job_name, interview_time, interview_address, remark, status, cand_name, cand_face, cand_position
+    </sql>
+
+</mapper>
