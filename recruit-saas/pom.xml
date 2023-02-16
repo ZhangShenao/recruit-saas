@@ -39,13 +39,6 @@
     <!--依赖管理:定义项目依赖版本号,此处不会真正引入依赖-->
     <dependencyManagement>
         <dependencies>
-            <!--Lombok依赖-->
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>1.18.24</version>
-            </dependency>
-
             <!--MySQL驱动-->
             <dependency>
                 <groupId>mysql</groupId>
