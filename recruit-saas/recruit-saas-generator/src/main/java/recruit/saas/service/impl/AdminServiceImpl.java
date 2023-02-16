@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * <p>
- * 慕聘网运营管理系统的admin账户表，仅登录，不提供注册 服务实现类
+ * 运营管理系统的admin账户表，仅登录，不提供注册 服务实现类
  * </p>
  *
  * @author ZhangShenao
