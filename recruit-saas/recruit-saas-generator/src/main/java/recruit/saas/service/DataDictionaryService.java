@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author ZhangShenao
- * @since 2023-02-16
+ * @since 2023-02-17
  */
 public interface DataDictionaryService extends IService<DataDictionary> {
 

@@ -1859,7 +1859,7 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `stu`;
 CREATE TABLE `stu` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` varchar(256) NOT NULL ,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `age` int NOT NULL,
   PRIMARY KEY (`id`) USING BTREE

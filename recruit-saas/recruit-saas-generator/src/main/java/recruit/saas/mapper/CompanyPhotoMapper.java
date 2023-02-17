@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author ZhangShenao
- * @since 2023-02-16
+ * @since 2023-02-17
  */
 public interface CompanyPhotoMapper extends BaseMapper<CompanyPhoto> {
 

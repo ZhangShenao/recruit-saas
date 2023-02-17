@@ -49,7 +49,7 @@ public class MyBatisGeneratorMain {
         strategy.setNaming(NamingStrategy.underline_to_camel);          // 下划线转驼峰命名
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);    // 下划线转驼峰命名
 //        strategy.setInclude(scanner("表名，多个英文逗号分割").split(","));
-//        strategy.setInclude("stu");
+        strategy.setInclude("stu");
         strategy.setInclude("users");
         strategy.setInclude("admin");
         strategy.setInclude("company");
