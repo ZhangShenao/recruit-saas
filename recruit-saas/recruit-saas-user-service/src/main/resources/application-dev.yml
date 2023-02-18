@@ -6,7 +6,7 @@ mybatis-plus:
       id-type: assign_id  #指定MyBatis Plus 主键生成策略
 
 spring:
-  datasource:                                     # 数据源的相关配置
+  datasource: # 数据源的相关配置
     type: com.zaxxer.hikari.HikariDataSource      # 数据源的类型，可以更改为其他的数据源配置，比如druid
     driver-class-name: com.mysql.cj.jdbc.Driver      # mysql/MariaDB 的数据库驱动类名称
     url: jdbc:mysql://remote-centos:3306/recruit_saas?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
@@ -21,3 +21,10 @@ spring:
       pool-name: DataSourceHikariCP           # 连接池的名字
       max-lifetime: 18000000                  # 连接池的最大生命时长（毫秒），超时则会被释放（retired）
       connection-test-query: SELECT 1
+
+  #SpringCloud配置
+  cloud:
+    nacos:
+      discovery:
+        server-addr: remote-centos:8848/   #设置Nacos注册中心地址
+        namespace: 166004f2-bd1e-4d70-aa0d-0b929a1e28b2   #设置Nacos服务namespace

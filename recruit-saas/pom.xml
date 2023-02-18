@@ -33,13 +33,32 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.3</version>
-        <relativePath/>
+        <version>2.6.11</version>
+        <relativePath />
     </parent>
+
 
     <!--依赖管理:定义项目依赖版本号,此处不会真正引入依赖-->
     <dependencyManagement>
         <dependencies>
+            <!--SpringCloud依赖-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>2021.0.4</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!--SpringCloud Alibaba依赖-->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>2021.0.1.0</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
             <!--MySQL驱动-->
             <dependency>
                 <groupId>mysql</groupId>
@@ -206,6 +225,7 @@
     </dependencyManagement>
 
 
+
     <!--编译、构建配置-->
     <build>
         <finalName>${project.artifactId}</finalName>
@@ -219,6 +239,11 @@
                     <target>1.8</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.1.0</version>
             </plugin>
         </plugins>
     </build>

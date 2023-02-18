@@ -1,0 +1,7 @@
+#SpringCloud配置
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: remote-centos:8848   #设置Nacos注册中心地址
+        namespace: 166004f2-bd1e-4d70-aa0d-0b929a1e28b2  #设置Nacos服务namespace
