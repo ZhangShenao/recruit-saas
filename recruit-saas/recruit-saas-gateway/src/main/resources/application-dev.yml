@@ -1,0 +1,22 @@
+spring:
+  cloud:
+    #Nacos服务注册与发现配置
+    nacos:
+      discovery:
+        server-addr: remote-centos:8848/   #设置Nacos注册中心地址
+        namespace: 166004f2-bd1e-4d70-aa0d-0b929a1e28b2   #设置Nacos服务namespace
+
+    #网关配置
+    gateway:
+      discovery:
+        locator:
+          enabled: true #开启动态路由,可以根据服务名从注册中心获取到服务实例
+      routes:   #配置网关路由规则
+        - id: userServiceRouter   #路由规则唯一标识
+          uri: lb://recruit-saas-user-service #根据负载均衡策略动态寻址
+          predicates: #谓词匹配,符合条件的会放行
+            - Path=/user/**
+        - id: userServiceRouter   #路由规则唯一标识
+          uri: lb://recruit-saas-company-service #根据负载均衡策略动态寻址
+          predicates: #谓词匹配,符合条件的会放行
+            - Path=/company/**
