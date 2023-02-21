@@ -3,15 +3,13 @@ package recruit.saas.auth.service.controller;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import recruit.saas.auth.service.bo.SMSCodeParamBo;
-import recruit.saas.auth.service.constants.RedisKeys;
+import recruit.saas.common.constants.RedisKeys;
 import recruit.saas.auth.service.param.SendSMSCodeParam;
 import recruit.saas.auth.service.service.SMSService;
 import recruit.saas.common.rest.CommonRestResponse;
@@ -33,7 +31,6 @@ public class SMSController {
     private SMSService smsService;
 
     @Resource
-    @Qualifier("stringRedisTemplate")
     private StringRedisTemplate stringRedisTemplate;
 
     @PostMapping("/code/send")
