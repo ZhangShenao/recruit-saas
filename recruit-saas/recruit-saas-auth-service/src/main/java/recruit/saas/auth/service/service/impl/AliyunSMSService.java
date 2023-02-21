@@ -56,7 +56,7 @@ public class AliyunSMSService implements SMSService {
             //.setConnectTimeout(Duration.ofSeconds(30))
             SendSmsRequest sendSmsRequest = SendSmsRequest.builder()
                     .phoneNumbers(mobile)
-                    .signName("蹲个工作网")
+                    .signName(SIGNATURE_NAME)
                     .templateCode(templateId)
                     .templateParam(templateParamJson)
                     // Request-level configuration rewrite, can set Http request parameters, etc.

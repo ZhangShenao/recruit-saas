@@ -6,13 +6,7 @@ package recruit.saas.auth.service.service;
  * Description 短信服务接口
  */
 public interface SMSService {
-    /**
-     * 发送短信
-     *
-     * @param mobile     手机号
-     * @param templateId 短信模板ID
-     * @return 是否发送成功
-     */
+    String SIGNATURE_NAME = "蹲个工作网";
     /**
      * 发送短信
      *
