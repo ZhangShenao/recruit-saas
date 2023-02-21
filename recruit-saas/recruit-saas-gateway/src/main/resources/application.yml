@@ -3,8 +3,6 @@ server:
   tomcat:
     uri-encoding: UTF-8
     max-swallow-size: -1    # tomcat默认大小2M，超过2M的文件不会被捕获，需要调整此处大小为100MB或者-1即可
-#  servlet:
-#    context-path: /gateway
 spring:
   application:
     name: recruit-saas-gateway-service

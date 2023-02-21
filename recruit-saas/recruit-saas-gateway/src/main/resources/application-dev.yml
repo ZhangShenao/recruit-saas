@@ -11,7 +11,7 @@ spring:
       discovery:
         locator:
           enabled: true #开启动态路由,可以根据服务名从注册中心获取到服务实例
-      routes:   #配置网关路由规则
+      routes: #配置网关路由规则
         - id: userServiceRouter   #路由规则唯一标识
           uri: lb://recruit-saas-user-service #根据负载均衡策略动态寻址
           predicates: #谓词匹配,符合条件的会放行
@@ -20,3 +20,7 @@ spring:
           uri: lb://recruit-saas-company-service #根据负载均衡策略动态寻址
           predicates: #谓词匹配,符合条件的会放行
             - Path=/company/**
+        - id: authServiceRouter   #路由规则唯一标识
+          uri: lb://recruit-saas-auth-service #根据负载均衡策略动态寻址
+          predicates: #谓词匹配,符合条件的会放行
+            - Path=/auth/**
