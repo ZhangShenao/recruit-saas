@@ -8,6 +8,7 @@ import com.aliyun.sdk.service.dysmsapi20170525.models.SendSmsResponse;
 import com.google.gson.Gson;
 import darabonba.core.client.ClientOverrideConfiguration;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import recruit.saas.auth.service.service.SMSService;
 
@@ -24,12 +25,19 @@ import java.util.concurrent.CompletableFuture;
 public class AliyunSMSService implements SMSService {
     private StaticCredentialProvider provider;
 
+    //从配置中心获取阿里云Access信息
+    @Value("${aliyun.access-key.id}")
+    private String accessKeyId;
+
+    @Value("${aliyun.access-key.secrete}")
+    private String accessKeySecrete;
+
     @PostConstruct
     private void init() {
         // Configure Credentials authentication information, including ak, secret, token
         this.provider = StaticCredentialProvider.create(Credential.builder()
-                .accessKeyId("")
-                .accessKeySecret("")
+                .accessKeyId(accessKeyId)
+                .accessKeySecret(accessKeySecrete)
                 //.securityToken("<your-token>") // use STS token
                 .build());
     }

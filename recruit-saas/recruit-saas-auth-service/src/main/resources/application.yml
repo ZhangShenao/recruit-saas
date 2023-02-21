@@ -6,9 +6,8 @@ server:
   servlet:
     context-path: /auth
 spring:
-  application:
-    name: recruit-saas-auth-service
-
+  #  application:
+  #    name: recruit-saas-auth-service
   profiles:
     active: dev
 
