@@ -21,6 +21,17 @@ spring:
       max-lifetime: 18000000                  # 连接池的最大生命时长（毫秒），超时则会被释放（retired）
       connection-test-query: SELECT 1
 
+  #Redis数据源配置
+  redis:
+    host: remote-centos
+    port: 6379
+    database: 0
+    lettuce:
+      pool:
+        max-idle: 8
+        max-active: 8
+        min-idle: 0
+
 #MyBatis Plus配置
 mybatis-plus:
   mapper-locations: classpath*:/mapper/*.xml  #指定Mapper XML地址
