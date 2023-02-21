@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="recruit.saas.auth.service.mapper.UsersMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="recruit.saas.auth.service.entity.Users">
+        <id column="id" property="id" />
+        <result column="mobile" property="mobile" />
+        <result column="nickname" property="nickname" />
+        <result column="real_name" property="realName" />
+        <result column="show_which_name" property="showWhichName" />
+        <result column="sex" property="sex" />
+        <result column="face" property="face" />
+        <result column="email" property="email" />
+        <result column="birthday" property="birthday" />
+        <result column="country" property="country" />
+        <result column="province" property="province" />
+        <result column="city" property="city" />
+        <result column="district" property="district" />
+        <result column="description" property="description" />
+        <result column="start_work_date" property="startWorkDate" />
+        <result column="position" property="position" />
+        <result column="role" property="role" />
+        <result column="hr_in_which_company_id" property="hrInWhichCompanyId" />
+        <result column="hr_signature" property="hrSignature" />
+        <result column="hr_tags" property="hrTags" />
+        <result column="created_time" property="createdTime" />
+        <result column="updated_time" property="updatedTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, mobile, nickname, real_name, show_which_name, sex, face, email, birthday, country, province, city, district, description, start_work_date, position, role, hr_in_which_company_id, hr_signature, hr_tags, created_time, updated_time
+    </sql>
+
+</mapper>
