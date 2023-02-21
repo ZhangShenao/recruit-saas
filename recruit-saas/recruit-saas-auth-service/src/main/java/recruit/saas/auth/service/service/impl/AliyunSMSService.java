@@ -9,10 +9,10 @@ import com.google.gson.Gson;
 import darabonba.core.client.ClientOverrideConfiguration;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Service;
 import recruit.saas.auth.service.service.SMSService;
 
-import javax.annotation.PostConstruct;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -22,9 +22,8 @@ import java.util.concurrent.CompletableFuture;
  */
 @Service
 @Slf4j
+@RefreshScope   //监听属性动态刷新
 public class AliyunSMSService implements SMSService {
-    private StaticCredentialProvider provider;
-
     //从配置中心获取阿里云Access信息
     @Value("${aliyun.access-key.id}")
     private String accessKeyId;
@@ -32,18 +31,13 @@ public class AliyunSMSService implements SMSService {
     @Value("${aliyun.access-key.secrete}")
     private String accessKeySecrete;
 
-    @PostConstruct
-    private void init() {
-        // Configure Credentials authentication information, including ak, secret, token
-        this.provider = StaticCredentialProvider.create(Credential.builder()
+    @Override
+    public boolean sendSMS(String mobile, String templateId, String templateParamJson) {
+        StaticCredentialProvider provider = StaticCredentialProvider.create(Credential.builder()
                 .accessKeyId(accessKeyId)
                 .accessKeySecret(accessKeySecrete)
                 //.securityToken("<your-token>") // use STS token
                 .build());
-    }
-
-    @Override
-    public boolean sendSMS(String mobile, String templateId, String templateParamJson) {
         try (AsyncClient client = AsyncClient.builder()
                 .region("cn-hangzhou") // Region ID
                 //.httpClient(httpClient) // Use the configured HttpClient, otherwise use the default HttpClient (Apache HttpClient)
