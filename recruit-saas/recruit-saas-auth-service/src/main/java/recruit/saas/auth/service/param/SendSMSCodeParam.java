@@ -3,7 +3,9 @@ package recruit.saas.auth.service.param;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;
-import org.apache.commons.lang3.StringUtils;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.NotBlank;
 
 /**
  * @author ZhangShenao
@@ -13,5 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 @Data
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class SendSMSCodeParam {
+    @NotBlank(message = "手机号不能为空")
+    @Length(min = 11, max = 11, message = "手机号不符合要求")   //validation参数校验
     private String mobile;  //手机号
 }
