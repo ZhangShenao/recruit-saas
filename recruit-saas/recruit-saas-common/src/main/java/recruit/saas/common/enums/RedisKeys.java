@@ -1,4 +1,4 @@
-package recruit.saas.common.constants;
+package recruit.saas.common.enums;
 
 /**
  * @author ZhangShenao
@@ -6,8 +6,11 @@ package recruit.saas.common.constants;
  * Description 统一管理Redis Key
  */
 public enum RedisKeys {
+    //短信相关
     SMS_CODE("auth:sms:code:%s", "短信验证码", false, 60L * 5),
     SMS_CODE_IP_LOCK("auth:sms:code:lock:%s", "短信验证码IP锁", false, 60L * 5),
+
+    
     ;
     private String key; //key
     private String desc;    //描述

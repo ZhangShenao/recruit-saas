@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import recruit.saas.common.exception.CommonBusinessException;
 
 /**
  * @author ZhangShenao
@@ -43,5 +44,10 @@ public class CommonRestResponse<T> {
 
     public static <T> CommonRestResponse<T> ofResultCode(CommonResultCode resultCode, T data) {
         return new CommonRestResponse<>(resultCode.getStatus(), resultCode.getMsg(), resultCode.isSuccess(), data);
+    }
+
+    public static <T> CommonRestResponse<T> ofBusinessException(CommonBusinessException exception) {
+        CommonResultCode resultCode = exception.getCode();
+        return new CommonRestResponse<>(resultCode.getStatus(), resultCode.getMsg(), resultCode.isSuccess(), null);
     }
 }

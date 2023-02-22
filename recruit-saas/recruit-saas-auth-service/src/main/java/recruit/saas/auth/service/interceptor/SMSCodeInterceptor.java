@@ -5,12 +5,15 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import recruit.saas.auth.service.utils.IPUtils;
-import recruit.saas.common.constants.RedisKeys;
+import recruit.saas.common.enums.RedisKeys;
+import recruit.saas.common.exception.CommonBusinessException;
+import recruit.saas.common.rest.CommonResultCode;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.concurrent.TimeUnit;
+
+import static recruit.saas.common.constants.SMSConstants.SMS_CODE_LOCK_FLAG;
 
 /**
  * @author ZhangShenao
@@ -20,8 +23,6 @@ import java.util.concurrent.TimeUnit;
  */
 @Slf4j
 public class SMSCodeInterceptor implements HandlerInterceptor {
-    private static final String LOCK_FLAG = "1";
-
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 
@@ -35,13 +36,11 @@ public class SMSCodeInterceptor implements HandlerInterceptor {
         String value = stringRedisTemplate.opsForValue().get(key);
 
         //验证码未过期,拦截请求防止恶意刷
-        if (LOCK_FLAG.equals(value)) {
-            log.error("验证码还在有效期内,请勿重复获取!");
-            return false;
+        if (SMS_CODE_LOCK_FLAG.equals(value)) {
+            throw new CommonBusinessException(CommonResultCode.SMS_SNT_TOO_FREQUENTLY);
         }
 
-        //验证码已失效,设置锁标识,并将请求放行
-        stringRedisTemplate.opsForValue().set(key, LOCK_FLAG, RedisKeys.SMS_CODE_IP_LOCK.getTtlInSec(), TimeUnit.SECONDS);
+        //验证码已失效,将请求放行
         return true;
     }
 

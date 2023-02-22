@@ -64,10 +64,10 @@ public class AliyunSMSService implements SMSService {
                     // Request-level configuration rewrite, can set Http request parameters, etc.
                     // .requestConfiguration(RequestConfiguration.create().setHttpHeaders(new HttpHeaders()))
                     .build();
-            CompletableFuture<SendSmsResponse> response = client.sendSms(sendSmsRequest);
+         /*   CompletableFuture<SendSmsResponse> response = client.sendSms(sendSmsRequest);
             // Synchronously get the return value of the API request
             SendSmsResponse resp = response.get();
-            log.info("Send SMS Result: {}", new Gson().toJson(resp));
+            log.info("Send SMS Result: {}", new Gson().toJson(resp));*/
             return true;
         } catch (Exception e) {
             log.error("Send SMS Error! mobile: {}, templateId: {}", mobile, templateId, e);
