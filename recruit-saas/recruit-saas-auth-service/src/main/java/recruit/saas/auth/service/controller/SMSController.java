@@ -17,6 +17,7 @@ import recruit.saas.common.rest.CommonRestResponse;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.concurrent.TimeUnit;
 
 import static recruit.saas.common.constants.SMSConstants.*;
@@ -38,7 +39,7 @@ public class SMSController {
     private StringRedisTemplate stringRedisTemplate;
 
     @PostMapping("/code/send")
-    public CommonRestResponse<?> sendSMSCode(@RequestBody SendSMSCodeParam param, HttpServletRequest request) {
+    public CommonRestResponse<?> sendSMSCode(@Valid @RequestBody SendSMSCodeParam param, HttpServletRequest request) {
         //随机生成短信验证码
         String mobile = param.getMobile();
         String code = RandomStringUtils.randomNumeric(6);
