@@ -37,4 +37,4 @@ mybatis-plus:
   mapper-locations: classpath*:/mapper/*.xml  #指定Mapper XML地址
   global-config:
     db-config:
-      id-type: assign_id  #指定MyBatis Plus 主键生成策略
+      id-type: assign_id  #指定MyBatis Plus内置的主键生成策略(snowflake算法)

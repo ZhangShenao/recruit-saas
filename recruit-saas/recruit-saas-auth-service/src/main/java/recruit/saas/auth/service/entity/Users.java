@@ -303,28 +303,28 @@ public class Users implements Serializable {
     @Override
     public String toString() {
         return "Users{" +
-        "id=" + id +
-        ", mobile=" + mobile +
-        ", nickname=" + nickname +
-        ", realName=" + realName +
-        ", showWhichName=" + showWhichName +
-        ", sex=" + sex +
-        ", face=" + face +
-        ", email=" + email +
-        ", birthday=" + birthday +
-        ", country=" + country +
-        ", province=" + province +
-        ", city=" + city +
-        ", district=" + district +
-        ", description=" + description +
-        ", startWorkDate=" + startWorkDate +
-        ", position=" + position +
-        ", role=" + role +
-        ", hrInWhichCompanyId=" + hrInWhichCompanyId +
-        ", hrSignature=" + hrSignature +
-        ", hrTags=" + hrTags +
-        ", createdTime=" + createdTime +
-        ", updatedTime=" + updatedTime +
-        "}";
+                "id=" + id +
+                ", mobile=" + mobile +
+                ", nickname=" + nickname +
+                ", realName=" + realName +
+                ", showWhichName=" + showWhichName +
+                ", sex=" + sex +
+                ", face=" + face +
+                ", email=" + email +
+                ", birthday=" + birthday +
+                ", country=" + country +
+                ", province=" + province +
+                ", city=" + city +
+                ", district=" + district +
+                ", description=" + description +
+                ", startWorkDate=" + startWorkDate +
+                ", position=" + position +
+                ", role=" + role +
+                ", hrInWhichCompanyId=" + hrInWhichCompanyId +
+                ", hrSignature=" + hrSignature +
+                ", hrTags=" + hrTags +
+                ", createdTime=" + createdTime +
+                ", updatedTime=" + updatedTime +
+                "}";
     }
 }
