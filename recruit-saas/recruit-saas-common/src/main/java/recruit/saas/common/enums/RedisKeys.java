@@ -10,11 +10,11 @@ public enum RedisKeys {
     SMS_CODE("auth:sms:code:%s", "短信验证码", false, 60L * 5),
     SMS_CODE_IP_LOCK("auth:sms:code:lock:%s", "短信验证码IP锁", false, 60L * 5),
 
-    
-    ;
+    //JWT相关
+    USER_JWT_TOKEN("auth:user:token:%s", "用户JWT token", true, -1);
     private String key; //key
     private String desc;    //描述
-    private boolean persist;    //是否为持久化key
+    private final boolean persist;    //是否为持久化key
     private long ttlInSec;  //key过期时间
 
     RedisKeys(String key, String desc, boolean persist, long ttlInSec) {

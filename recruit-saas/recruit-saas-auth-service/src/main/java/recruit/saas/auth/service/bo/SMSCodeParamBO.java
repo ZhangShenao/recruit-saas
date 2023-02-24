@@ -11,6 +11,6 @@ import lombok.Data;
  */
 @Data
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class SMSCodeParamBo {
+public class SMSCodeParamBO {
     private String code;    //验证码
 }

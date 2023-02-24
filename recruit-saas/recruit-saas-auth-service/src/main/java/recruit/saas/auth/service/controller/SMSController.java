@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import recruit.saas.auth.service.bo.SMSCodeParamBo;
+import recruit.saas.auth.service.bo.SMSCodeParamBO;
 import recruit.saas.auth.service.param.SendSMSCodeParam;
 import recruit.saas.auth.service.service.SMSService;
 import recruit.saas.auth.service.utils.IPUtils;
@@ -47,7 +47,7 @@ public class SMSController {
         //将验证码保存至Redis,并设置有效期
         String key = String.format(SMS_CODE.getKey(), mobile);
         stringRedisTemplate.opsForValue().set(key, code, SMS_CODE.getTtlInSec(), TimeUnit.SECONDS);
-        SMSCodeParamBo p = new SMSCodeParamBo();
+        SMSCodeParamBO p = new SMSCodeParamBO();
         p.setCode(code);
 
         //发送短信

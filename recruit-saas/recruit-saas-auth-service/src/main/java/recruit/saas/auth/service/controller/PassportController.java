@@ -1,15 +1,19 @@
 package recruit.saas.auth.service.controller;
 
+import com.google.gson.Gson;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import recruit.saas.auth.service.component.JWTTool;
 import recruit.saas.auth.service.entity.Users;
+import recruit.saas.auth.service.param.LogoutParam;
 import recruit.saas.auth.service.param.MobileLoginParam;
 import recruit.saas.auth.service.sevice.UsersService;
-import recruit.saas.auth.service.vo.UsersVo;
+import recruit.saas.auth.service.vo.UsersVO;
+import recruit.saas.common.constants.JWTConstants;
 import recruit.saas.common.rest.CommonRestResponse;
 
 import javax.annotation.Resource;
@@ -17,6 +21,7 @@ import javax.validation.Valid;
 
 
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 import static recruit.saas.common.enums.RedisKeys.SMS_CODE;
 import static recruit.saas.common.rest.CommonResultCode.SMS_CODE_ERROR;
@@ -34,6 +39,9 @@ public class PassportController {
 
     @Resource
     private UsersService usersService;
+
+    @Resource
+    private JWTTool jwtTool;
 
     //手机号验证码登录
     @PostMapping("/login_by_mobile")
@@ -55,7 +63,23 @@ public class PassportController {
         Users users = existed.orElseGet(() -> usersService.createByMobile(mobile));
 
         //登录成功,返回用户信息
-        UsersVo vo = UsersVo.fromEntity(users);
+        UsersVO vo = UsersVO.fromEntity(users);
+
+        //生成JWT Token
+        String payload = new Gson().toJson(vo);
+        String token = jwtTool.generateTokenWithExpirationAndPrefix(payload, JWTConstants.APP_TOKEN_PREFIX, 60L * 60, TimeUnit.SECONDS);
+        vo.setToken(token);
         return CommonRestResponse.success(vo);
+    }
+
+    //退出登录
+    @PostMapping("/logout")
+    public CommonRestResponse<?> logout(@Valid @RequestBody LogoutParam param) {
+        //清除Redis中的token信息
+//        String userId = param.getUserId();
+//        String tokenKey = String.format(RedisKeys.USER_JWT_TOKEN.getKey(), userId);
+//        stringRedisTemplate.delete(tokenKey);
+        //TODO impl
+        return CommonRestResponse.success();
     }
 }
