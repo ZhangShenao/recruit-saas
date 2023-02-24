@@ -13,7 +13,7 @@ import recruit.saas.common.enums.UsersShowWhichName;
  */
 @Data
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class UsersVo {
+public class UsersVO {
     private String id;
 
     /**
@@ -36,8 +36,13 @@ public class UsersVo {
      */
     private String description;
 
-    public static UsersVo fromEntity(Users entity) {
-        UsersVo vo = new UsersVo();
+    /**
+     * 用户登录Token
+     */
+    private String token;
+
+    public static UsersVO fromEntity(Users entity) {
+        UsersVO vo = new UsersVO();
         vo.setId(entity.getId());
         if (UsersShowWhichName.REAL_NAME.getCode() == entity.getShowWhichName()) {
             vo.setDisplayName(entity.getRealName());

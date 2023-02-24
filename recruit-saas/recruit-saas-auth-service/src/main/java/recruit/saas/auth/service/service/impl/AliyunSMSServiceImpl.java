@@ -4,16 +4,12 @@ import com.aliyun.auth.credentials.Credential;
 import com.aliyun.auth.credentials.provider.StaticCredentialProvider;
 import com.aliyun.sdk.service.dysmsapi20170525.AsyncClient;
 import com.aliyun.sdk.service.dysmsapi20170525.models.SendSmsRequest;
-import com.aliyun.sdk.service.dysmsapi20170525.models.SendSmsResponse;
-import com.google.gson.Gson;
 import darabonba.core.client.ClientOverrideConfiguration;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Service;
 import recruit.saas.auth.service.service.SMSService;
-
-import java.util.concurrent.CompletableFuture;
 
 /**
  * @author ZhangShenao
@@ -23,7 +19,7 @@ import java.util.concurrent.CompletableFuture;
 @Service
 @Slf4j
 @RefreshScope   //监听属性动态刷新
-public class AliyunSMSService implements SMSService {
+public class AliyunSMSServiceImpl implements SMSService {
     //从配置中心获取阿里云Access信息
     @Value("${aliyun.access-key.id}")
     private String accessKeyId;

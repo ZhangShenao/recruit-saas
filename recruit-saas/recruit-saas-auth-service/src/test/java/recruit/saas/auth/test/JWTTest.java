@@ -20,16 +20,16 @@ import javax.crypto.SecretKey;
 @SpringBootTest
 @SpringBootConfiguration
 public class JWTTest {
-    private static final String SIGNATURE = "zsa-123456789-abcdefghijkl";  //签名
+    private static final String KEY = "zsa-123456789-abcdefghijkl";  //秘钥
 
     //测试生成Token
     @Test
     public void testGenerateJWTToken() {
         //对签名进行Base64编码
-        String encodedSig = new BASE64Encoder().encode(SIGNATURE.getBytes());
+        String encodedKey = new BASE64Encoder().encode(KEY.getBytes());
 
         //根据加密后的签名,生成秘钥key
-        SecretKey secretKey = Keys.hmacShaKeyFor(encodedSig.getBytes());
+        SecretKey secretKey = Keys.hmacShaKeyFor(encodedKey.getBytes());
 
         //自定义Payload
         Payload payload = new Payload();
@@ -52,10 +52,10 @@ public class JWTTest {
         String token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOlwiMVwiLFwibmFtZVwiOlwicGF5bG9hZFwifSJ9.sY3PmXT4f1mlNu9B28a-YNmJgoY_5IToWTNrRTyITyE";
 
         //对签名进行Base64编码
-        String encodedSig = new BASE64Encoder().encode(SIGNATURE.getBytes());
+        String encodedKey = new BASE64Encoder().encode(KEY.getBytes());
 
         //根据加密后的签名,生成秘钥key
-        SecretKey secretKey = Keys.hmacShaKeyFor(encodedSig.getBytes());
+        SecretKey secretKey = Keys.hmacShaKeyFor(encodedKey.getBytes());
 
         //创建JwtParser
         JwtParser jwtParser = Jwts.parserBuilder()
