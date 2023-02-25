@@ -7,16 +7,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import recruit.saas.auth.service.component.JWTTool;
+import recruit.saas.auth.service.assembler.UsersAssembler;
+import recruit.saas.auth.service.component.JWTGenerator;
 import recruit.saas.auth.service.entity.Users;
 import recruit.saas.auth.service.param.LogoutParam;
 import recruit.saas.auth.service.param.MobileLoginParam;
 import recruit.saas.auth.service.sevice.UsersService;
-import recruit.saas.auth.service.vo.UsersVO;
-import recruit.saas.common.constants.JWTConstants;
+import recruit.saas.pojo.vo.UsersVO;
+import recruit.saas.common.enums.JWTPlatformType;
 import recruit.saas.common.rest.CommonRestResponse;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 
@@ -41,11 +43,14 @@ public class PassportController {
     private UsersService usersService;
 
     @Resource
-    private JWTTool jwtTool;
+    private JWTGenerator jwtGenerator;
+
+    @Resource
+    private UsersAssembler usersAssembler;
 
     //手机号验证码登录
     @PostMapping("/login_by_mobile")
-    public CommonRestResponse<?> loginByMobile(@Valid @RequestBody MobileLoginParam param) {
+    public CommonRestResponse<?> loginByMobile(@Valid @RequestBody MobileLoginParam param, HttpServletResponse response) {
         String mobile = param.getMobile();
         String code = param.getCode();
 
@@ -63,12 +68,12 @@ public class PassportController {
         Users users = existed.orElseGet(() -> usersService.createByMobile(mobile));
 
         //登录成功,返回用户信息
-        UsersVO vo = UsersVO.fromEntity(users);
+        UsersVO vo = usersAssembler.usersEntity2VO(users);
 
-        //生成JWT Token
+        //生成JWT Token,并写入Response Header
         String payload = new Gson().toJson(vo);
-        String token = jwtTool.generateTokenWithExpirationAndPrefix(payload, JWTConstants.APP_TOKEN_PREFIX, 60L * 60, TimeUnit.SECONDS);
-        vo.setToken(token);
+        String token = jwtGenerator.generateTokenWithExpirationAndPrefix(payload, JWTPlatformType.APP.getTokenPrefix(), 60L * 60, TimeUnit.SECONDS);
+        response.addHeader(JWTPlatformType.TOKEN_HEADER_KEY, token);
         return CommonRestResponse.success(vo);
     }
 

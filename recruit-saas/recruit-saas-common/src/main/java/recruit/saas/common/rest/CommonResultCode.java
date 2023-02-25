@@ -16,11 +16,14 @@ public enum CommonResultCode {
     //验证码相关
     SMS_SNT_TOO_FREQUENTLY(2001, false, "短信发送过于频繁，请稍后再试~"),
 
+    //登录相关
+    NOT_LOGIN(3001, false, "请登录后再继续操作~"),
+    TOKEN_EXPIRED(3002, false, "您的登录状态已过期，请重新登录~"),
+    INVALID_TOKEN(3003, false, "您的登录状态异常，请重新登录~"),
+
     SMS_CODE_ERROR(2002, false, "验证码过期或不匹配，请重新获取~"),
 
     //通用异常：50x
-    UN_LOGIN(501, false, "请登录后再继续操作！"),
-
     TICKET_INVALID(502, false, "会话失效，请重新登录！"),
 
     HR_TICKET_INVALID(5021, false, "手机端会话失效，请重新登录！"),

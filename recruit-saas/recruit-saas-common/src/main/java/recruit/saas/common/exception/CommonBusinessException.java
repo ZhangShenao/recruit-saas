@@ -11,9 +11,13 @@ import recruit.saas.common.rest.CommonResultCode;
 public class CommonBusinessException extends RuntimeException {
     private CommonResultCode code;
 
-    public CommonBusinessException(CommonResultCode code) {
+    private CommonBusinessException(CommonResultCode code) {
         super("result code: " + code.getStatus() + ", message: " + code.getMsg());
         this.code = code;
+    }
+
+    public static CommonBusinessException ofResultCode(CommonResultCode code) {
+        return new CommonBusinessException(code);
     }
 
     public CommonResultCode getCode() {

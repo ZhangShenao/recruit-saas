@@ -37,7 +37,7 @@ public class SMSCodeInterceptor implements HandlerInterceptor {
 
         //验证码未过期,拦截请求防止恶意刷
         if (SMS_CODE_LOCK_FLAG.equals(value)) {
-            throw new CommonBusinessException(CommonResultCode.SMS_SNT_TOO_FREQUENTLY);
+            throw CommonBusinessException.ofResultCode(CommonResultCode.SMS_SNT_TOO_FREQUENTLY);
         }
 
         //验证码已失效,将请求放行
