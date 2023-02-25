@@ -5,7 +5,7 @@ import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import recruit.saas.auth.service.props.JWTProperties;
-import recruit.saas.common.constants.JWTConstants;
+import recruit.saas.common.enums.JWTPlatformType;
 import sun.misc.BASE64Encoder;
 
 import javax.annotation.Resource;
@@ -16,24 +16,25 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author ZhangShenao
  * @date 2023/2/24 11:59 AM
- * Description JWT工具组件
+ * Description JWT生成器
  */
 @Component
 @Slf4j
-public class JWTTool {
+public class JWTGenerator {
     @Resource
     private JWTProperties props;
 
     /**
      * 生成带过期时间和前缀的的JWT Token
-     * @param payload 业务字段
-     * @param prefix 自定义前缀
+     *
+     * @param payload  业务字段
+     * @param prefix   自定义前缀
      * @param duration 过期时间
      * @param timeUnit 过期时间单位
      * @return token
      */
     public String generateTokenWithExpirationAndPrefix(String payload, String prefix, long duration, TimeUnit timeUnit) {
-        return prefix + JWTConstants.TOKEN_PREFIX_DELIMITER + generateTokenWithExpiration(payload, duration, timeUnit);
+        return prefix + JWTPlatformType.TOKEN_PREFIX_DELIMITER + generateTokenWithExpiration(payload, duration, timeUnit);
     }
 
     /**
@@ -54,7 +55,8 @@ public class JWTTool {
 
     /**
      * 生成带过期时间的JWT Token
-     * @param payload 业务字段
+     *
+     * @param payload  业务字段
      * @param duration 过期时间(s)
      * @param timeUnit 过期时间单位
      * @return token
