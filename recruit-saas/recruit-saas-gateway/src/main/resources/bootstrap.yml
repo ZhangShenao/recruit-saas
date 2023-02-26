@@ -1,6 +1,6 @@
 spring:
   application:
-    name: recruit-saas-auth-service     # 必须把name属性从application.yml迁移过来，否则无法动态刷新
+    name: recruit-saas-gateway-service     # 必须把name属性从application.yml迁移过来，否则无法动态刷新
   cloud:
     nacos:
       config:
@@ -24,10 +24,6 @@ spring:
         refresh-enabled: true
         # Nacos的扩展配置项，数字越大优先级越高
         extension-configs:
-          - dataId: aliyun_access.yml   #Aliyun Access Token 配置
-            group: SMS_GROUP
-            # 动态刷新
-            refresh: true
           - dataId: jwt.yaml  #JWT配置
             group: JWT_GROUP
             refresh: true

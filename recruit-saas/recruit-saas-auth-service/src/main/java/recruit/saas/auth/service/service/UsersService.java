@@ -1,4 +1,4 @@
-package recruit.saas.auth.service.sevice;
+package recruit.saas.auth.service.service;
 
 import recruit.saas.auth.service.entity.Users;
 
