@@ -9,7 +9,6 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>recruit-saas-common</module>
-        <module>recruit-saas-pojo</module>
         <module>recruit-saas-api</module>
         <module>recruit-saas-user-service</module>
         <module>recruit-saas-company-service</module>

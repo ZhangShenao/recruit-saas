@@ -13,7 +13,7 @@ import recruit.saas.auth.service.entity.Users;
 import recruit.saas.auth.service.param.LogoutParam;
 import recruit.saas.auth.service.param.MobileLoginParam;
 import recruit.saas.auth.service.sevice.UsersService;
-import recruit.saas.pojo.vo.UsersVO;
+import recruit.saas.common.vo.UsersVO;
 import recruit.saas.common.enums.JWTPlatformType;
 import recruit.saas.common.rest.CommonRestResponse;
 

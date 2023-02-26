@@ -1,4 +1,4 @@
-package recruit.saas.pojo.vo;
+package recruit.saas.common.vo;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;

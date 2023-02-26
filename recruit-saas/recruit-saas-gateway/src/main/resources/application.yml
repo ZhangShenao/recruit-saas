@@ -9,6 +9,8 @@ spring:
 
   profiles:
     active: dev
+  main:
+    web-application-type: reactive  #设置WebApplication类型为reactive
 
 logging:
   level:

@@ -12,6 +12,11 @@
     <artifactId>recruit-saas-common</artifactId>
 
     <dependencies>
+        <!--SpringBoot Starter Web-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
         <!--Lombok依赖-->
         <dependency>
             <groupId>org.projectlombok</groupId>
