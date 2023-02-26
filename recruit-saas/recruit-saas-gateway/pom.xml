@@ -60,6 +60,16 @@
             <version>0.11.5</version>
             <scope>runtime</scope>
         </dependency>
+        <!--Nacos Config配置中心-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+        <!--bootstrap依赖,可以在服务启动前优先读取bootstrap.yml文件-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

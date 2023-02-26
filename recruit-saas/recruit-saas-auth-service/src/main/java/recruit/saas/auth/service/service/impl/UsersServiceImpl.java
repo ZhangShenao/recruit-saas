@@ -1,4 +1,4 @@
-package recruit.saas.auth.service.sevice.impl;
+package recruit.saas.auth.service.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import lombok.extern.slf4j.Slf4j;
@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import recruit.saas.auth.service.entity.Users;
 import recruit.saas.auth.service.mapper.UsersMapper;
-import recruit.saas.auth.service.sevice.UsersService;
+import recruit.saas.auth.service.service.UsersService;
 import recruit.saas.common.constants.UsersConstants;
 import recruit.saas.common.enums.Sex;
 import recruit.saas.common.enums.UsersRole;
