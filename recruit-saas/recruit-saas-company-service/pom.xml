@@ -12,11 +12,6 @@
     <artifactId>recruit-saas-company-service</artifactId>
 
     <dependencies>
-        <!--SpringBoot Starter Web依赖-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
         <!--API依赖-->
         <dependency>
             <groupId>william</groupId>

@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import recruit.saas.auth.service.entity.Users;
 import recruit.saas.common.enums.UsersShowWhichName;
-import recruit.saas.pojo.vo.UsersVO;
+import recruit.saas.common.vo.UsersVO;
 
 /**
  * @author ZhangShenao

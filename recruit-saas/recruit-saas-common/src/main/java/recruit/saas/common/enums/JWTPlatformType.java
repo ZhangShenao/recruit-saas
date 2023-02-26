@@ -6,9 +6,9 @@ package recruit.saas.common.enums;
  * Description JWT平台类型
  */
 public enum JWTPlatformType {
-    APP(1, "APP端", "app"),
-    SAAS(2, "企业平台SaaS端", "saas"),
-    ADMIN(3, "管理后台", "admin"),
+    APP(1, "APP端", "app","APP-USER"),
+    SAAS(2, "企业平台SaaS端", "saas","SAAS-USER"),
+    ADMIN(3, "管理后台", "admin","ADMIN-USER"),
     ;
 
     public static final String TOKEN_PREFIX_DELIMITER = "@";    //token前缀分隔符
@@ -18,10 +18,13 @@ public enum JWTPlatformType {
     private String name;
     private String tokenPrefix; //Token前缀
 
-    JWTPlatformType(int code, String name, String tokenPrefix) {
+    private String userHeaderKey;   //用户信息的Header Key
+
+    JWTPlatformType(int code, String name, String tokenPrefix, String usersHeaderKey) {
         this.code = code;
         this.name = name;
         this.tokenPrefix = tokenPrefix;
+        this.userHeaderKey = usersHeaderKey;
     }
 
     public int getCode() {
@@ -34,5 +37,9 @@ public enum JWTPlatformType {
 
     public String getTokenPrefix() {
         return tokenPrefix;
+    }
+
+    public String getUserHeaderKey() {
+        return userHeaderKey;
     }
 }
