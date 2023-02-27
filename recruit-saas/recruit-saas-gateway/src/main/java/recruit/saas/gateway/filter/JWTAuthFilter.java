@@ -34,6 +34,7 @@ import java.util.Optional;
  * @author ZhangShenao
  * @date 2023/2/25 4:34 PM
  * Description JWT鉴权过滤器
+ * GlobalFilter全局过滤器,对所有路由均生效
  */
 @Slf4j
 @Component

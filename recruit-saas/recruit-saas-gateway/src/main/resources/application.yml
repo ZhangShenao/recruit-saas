@@ -7,6 +7,12 @@ spring:
 #  application:
 #    name: recruit-saas-gateway-service
 
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true #开启动态路由,可以根据服务名从注册中心获取到服务实例
+
   profiles:
     active: dev
   main:
