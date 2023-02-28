@@ -3,15 +3,32 @@ server:
   tomcat:
     uri-encoding: UTF-8
     max-swallow-size: -1    # tomcat默认大小2M，超过2M的文件不会被捕获，需要调整此处大小为100MB或者-1即可
+  servlet:
+    context-path: /gateway
 spring:
-#  application:
-#    name: recruit-saas-gateway-service
+  #  application:
+  #    name: recruit-saas-gateway-service
 
   cloud:
     gateway:
       discovery:
         locator:
           enabled: true #开启动态路由,可以根据服务名从注册中心获取到服务实例
+
+      #跨域配置
+      globalcors:
+        cors-configurations:
+          '[/**]': #匹配请求路径
+            allowed-origins: #授信地址列表
+              - "http://localhost:8001"
+              - "https://www.baicu.com"
+            #Cookie、Header等认证信息
+            allowed-methods: "*"
+            allow-credentials: true
+            exposed-headers: "*"
+            allowed-headers: "*"
+            max-age: 1000 #浏览器缓存时间
+
 
   profiles:
     active: dev

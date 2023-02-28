@@ -31,7 +31,7 @@ public class JWTParser {
      * @param token JWT Token
      * @return 业务payload
      */
-    public String parseJWTToken(String token) throws Exception{
+    public String parseJWTToken(String token) throws Exception {
         String key = props.getKey();
         //对签名进行Base64编码
         String encodedKey = new BASE64Encoder().encode(key.getBytes());
