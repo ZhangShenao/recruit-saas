@@ -11,7 +11,12 @@ public enum RedisKeys {
     SMS_CODE_IP_LOCK("auth:sms:code:lock:%s", "短信验证码IP锁", false, 60L * 5),
 
     //JWT相关
-    USER_JWT_TOKEN("auth:user:token:%s", "用户JWT token", true, -1);
+    USER_JWT_TOKEN("auth:user:token:%s", "用户JWT token", true, -1),
+
+    //二维码相关
+    QR_TOKEN_USAGE_FLAG("auth:qr:token:usage:%s", "SaaS端二维码使用Token标记", false, 60L * 5),
+
+    ;
     private String key; //key
     private String desc;    //描述
     private final boolean persist;    //是否为持久化key
