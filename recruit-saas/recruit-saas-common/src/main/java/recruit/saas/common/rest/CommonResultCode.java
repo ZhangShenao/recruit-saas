@@ -20,6 +20,9 @@ public enum CommonResultCode {
     NOT_LOGIN(3001, false, "请登录后再继续操作~"),
     TOKEN_EXPIRED(3002, false, "您的登录状态已过期，请重新登录~"),
     INVALID_TOKEN(3003, false, "您的登录状态异常，请重新登录~"),
+    QR_TOKEN_EXPIRED(3004, false, "二维码已过期，请重新扫码登录~"),
+    QR_TOKEN_INVALID(3005, false, "二维码状态异常，请重新扫码登录~"),
+    ONLY_HR_CAN_LOGIN(3006, false, "该登录功能仅针对HR角色开放~"),
 
     SMS_CODE_ERROR(2002, false, "验证码过期或不匹配，请重新获取~"),
 

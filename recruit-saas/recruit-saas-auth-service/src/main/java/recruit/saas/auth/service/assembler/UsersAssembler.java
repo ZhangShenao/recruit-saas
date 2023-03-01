@@ -28,6 +28,7 @@ public class UsersAssembler {
         vo.setSex(entity.getSex());
         vo.setFace(entity.getFace());
         vo.setDescription(entity.getDescription());
+        vo.setRole(entity.getRole());
         return vo;
     }
 }

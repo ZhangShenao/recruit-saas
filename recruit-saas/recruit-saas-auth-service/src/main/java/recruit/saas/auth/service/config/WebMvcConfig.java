@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import recruit.saas.auth.service.interceptor.SMSCodeInterceptor;
+import recruit.saas.common.filter.CurrentContextInterceptor;
 
 /**
  * @author ZhangShenao
@@ -18,8 +19,16 @@ public class WebMvcConfig implements WebMvcConfigurer {
         return new SMSCodeInterceptor();
     }
 
+    @Bean
+    public CurrentContextInterceptor currentContextInterceptor() {
+        return new CurrentContextInterceptor();
+    }
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        //上下文信息拦截器
+        registry.addInterceptor(currentContextInterceptor()).addPathPatterns("/**");
+
         //验证码拦截器
         registry.addInterceptor(smsCodeInterceptor()).addPathPatterns("/sms/code/send");   //这里路径匹配要去掉全局的context-path,不然会匹配不到)
     }
