@@ -1,16 +1,23 @@
 package recruit.saas.auth.service.controller;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import recruit.saas.auth.service.param.AffirmQRLoginParam;
+import recruit.saas.common.context.CurrentContext;
+import recruit.saas.common.enums.UsersRole;
+import recruit.saas.common.exception.CommonBusinessException;
 import recruit.saas.common.rest.CommonRestResponse;
+import recruit.saas.common.vo.UsersVO;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import static recruit.saas.common.enums.RedisKeys.*;
+import static recruit.saas.common.rest.CommonResultCode.*;
 
 /**
  * @author ZhangShenao
@@ -35,5 +42,51 @@ public class SaaSPassportController {
         String key = String.format(QR_TOKEN_USAGE_FLAG.getKey(), token);
         stringRedisTemplate.opsForValue().set(key, QR_TOKEN_NOT_USED_FLAG, QR_TOKEN_USAGE_FLAG.getTtlInSec(), TimeUnit.SECONDS);
         return CommonRestResponse.success(token);
+    }
+
+    //判断二维码Token是否被使用
+    //前端会定时轮询该接口,主要用于判断扫码登录的二维码是否过期
+    @GetMapping("/is_qr_token_used")
+    public CommonRestResponse<Boolean> isQRTokenUsed(@RequestParam("qr_token") String qrToken) {
+        String key = String.format(QR_TOKEN_USAGE_FLAG.getKey(), qrToken);
+        String value = stringRedisTemplate.opsForValue().get(key);
+        if (StringUtils.isBlank(value)) { //二维码Token超时未被使用
+            return CommonRestResponse.success(false);
+        }
+        boolean used = (StringUtils.equalsIgnoreCase(QR_TOKEN_USED_FLAG, value));
+        return CommonRestResponse.success(used);
+    }
+
+    //二维码扫码确认登录
+    @PostMapping("/affirm_qr_login")
+    public CommonRestResponse<?> affirmQRLogin(@RequestBody @Valid AffirmQRLoginParam param) {
+        //校验二维码Token状态
+        String qrToken = param.getQrToken();
+        String key = String.format(QR_TOKEN_USAGE_FLAG.getKey(), qrToken);
+        String value = stringRedisTemplate.opsForValue().get(key);
+        if (StringUtils.isBlank(value)) {
+            throw CommonBusinessException.ofResultCode(QR_TOKEN_EXPIRED);
+        }
+        boolean used = (StringUtils.equalsIgnoreCase(QR_TOKEN_USED_FLAG, value));
+        if (used) {
+            throw CommonBusinessException.ofResultCode(QR_TOKEN_INVALID);
+        }
+
+        //将二维码Token标记为已使用状态
+        stringRedisTemplate.opsForValue().set(key, QR_TOKEN_USED_FLAG);
+
+        //获取登录用户信息
+        Optional<UsersVO> currentUser = CurrentContext.getCurrentUser();
+        if (!currentUser.isPresent()) {
+            throw CommonBusinessException.ofResultCode(NOT_LOGIN);
+        }
+
+        //校验是否为HR角色
+        UsersVO user = currentUser.get();
+        Integer role = user.getRole();
+        if (role == null || UsersRole.HR.getCode() != role) {
+            throw CommonBusinessException.ofResultCode(ONLY_HR_CAN_LOGIN);
+        }
+        return CommonRestResponse.success(user);
     }
 }
