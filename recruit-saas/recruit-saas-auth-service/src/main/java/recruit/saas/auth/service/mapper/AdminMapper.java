@@ -1,7 +1,9 @@
-package recruit.saas.mapper;
+package recruit.saas.auth.service.mapper;
 
-import recruit.saas.entity.Admin;
+
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.springframework.stereotype.Repository;
+import recruit.saas.auth.service.entity.Admin;
 
 /**
  * <p>
@@ -11,6 +13,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author ZhangShenao
  * @since 2023-03-02
  */
+@Repository
 public interface AdminMapper extends BaseMapper<Admin> {
 
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="recruit.saas.mapper.AdminMapper">
+<mapper namespace="recruit.saas.auth.service.mapper.AdminMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="recruit.saas.entity.Admin">
+    <resultMap id="BaseResultMap" type="recruit.saas.auth.service.entity.Admin">
         <id column="id" property="id" />
         <result column="username" property="username" />
         <result column="password" property="password" />

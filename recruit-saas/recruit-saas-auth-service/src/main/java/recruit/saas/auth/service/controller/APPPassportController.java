@@ -31,11 +31,11 @@ import static recruit.saas.common.rest.CommonResultCode.SMS_CODE_ERROR;
 /**
  * @author ZhangShenao
  * @date 2023/2/22 2:22 PM
- * Description 注册与登录API
+ * Description APP端注册与登录API
  */
 @RestController
-@RequestMapping("/passport")
-public class PassportController {
+@RequestMapping("/app/passport")
+public class APPPassportController {
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 

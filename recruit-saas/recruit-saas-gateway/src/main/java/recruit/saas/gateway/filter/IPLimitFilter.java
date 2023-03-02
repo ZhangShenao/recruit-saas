@@ -12,7 +12,6 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 import recruit.saas.common.enums.RedisKeys;
 import recruit.saas.common.exception.CommonBusinessException;
-import recruit.saas.common.rest.CommonResultCode;
 import recruit.saas.common.utils.IPUtils;
 import recruit.saas.gateway.props.IPLimitProperties;
 
@@ -21,6 +20,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
+
+import static recruit.saas.common.rest.CommonResultCode.*;
 
 /**
  * @author ZhangShenao
@@ -57,7 +58,7 @@ public class IPLimitFilter implements GlobalFilter, Ordered, WriteErrorResponseF
         String ip = IPUtils.getClientIP(exchange.getRequest());
         List<String> blackList = props.getBlackList();
         if (blackList != null && blackList.contains(ip)) {
-            return writeErrorResponse(exchange, CommonBusinessException.ofResultCode(CommonResultCode.IP_DENIED));
+            return writeErrorResponse(exchange, CommonBusinessException.ofResultCode(IP_DENIED));
         }
 
         //对IP进行限流
@@ -73,7 +74,7 @@ public class IPLimitFilter implements GlobalFilter, Ordered, WriteErrorResponseF
         String ipDenyKey = String.format(RedisKeys.IP_DENY_FLAG.getKey(), ip);
         String ipDenyValue = stringRedisTemplate.opsForValue().get(ipDenyKey);
         if (StringUtils.equalsIgnoreCase(IP_DENY_FLAG_VALUE, ipDenyValue)) {
-            return writeErrorResponse(exchange, CommonBusinessException.ofResultCode(CommonResultCode.IP_DENIED));
+            return writeErrorResponse(exchange, CommonBusinessException.ofResultCode(IP_DENIED));
         }
 
         //记录IP访问次数
@@ -90,7 +91,7 @@ public class IPLimitFilter implements GlobalFilter, Ordered, WriteErrorResponseF
         //如果IP访问次数超出上限,则禁止访问
         if (count > props.getLimitCount()) {
             stringRedisTemplate.opsForValue().set(ipDenyKey, IP_DENY_FLAG_VALUE, props.getDenySec(), TimeUnit.SECONDS);
-            return writeErrorResponse(exchange, CommonBusinessException.ofResultCode(CommonResultCode.REQUEST_TOO_FREQUENT));
+            return writeErrorResponse(exchange, CommonBusinessException.ofResultCode(REQUEST_TOO_FREQUENT));
         }
 
         //正常访问放行

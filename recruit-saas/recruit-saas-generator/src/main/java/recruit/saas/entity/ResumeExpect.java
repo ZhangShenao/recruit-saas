@@ -9,7 +9,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author ZhangShenao
- * @since 2023-02-17
+ * @since 2023-03-02
  */
 public class ResumeExpect implements Serializable {
 

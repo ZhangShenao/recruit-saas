@@ -17,6 +17,7 @@ public enum CommonResultCode {
 
     //短信相关
     SMS_SNT_TOO_FREQUENTLY(2001, false, "短信发送过于频繁，请稍后再试~"),
+    SMS_CODE_ERROR(2002, false, "短信验证码异常，请重试~"),
 
     //登录相关
     NOT_LOGIN(3001, false, "请登录后再继续操作~"),
@@ -25,6 +26,7 @@ public enum CommonResultCode {
     QR_TOKEN_EXPIRED(3004, false, "二维码已过期，请重新扫码登录~"),
     QR_TOKEN_INVALID(3005, false, "二维码状态异常，请重新扫码登录~"),
     ONLY_HR_CAN_LOGIN(3006, false, "该登录功能仅针对HR角色开放~"),
+    USERNAME_OR_PASSWORD_ERROR(3007, false, "用户名或密码错误，请确认后重试~"),
 
     ;
     private int status; //状态码
