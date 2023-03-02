@@ -1,25 +1,18 @@
 package recruit.saas.gateway.filter;
 
-import com.google.gson.Gson;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.HttpHeaders;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
-import org.springframework.core.io.buffer.DataBuffer;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
-import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
-import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 import recruit.saas.common.enums.JWTPlatformType;
 import recruit.saas.common.exception.CommonBusinessException;
-import recruit.saas.common.rest.CommonRestResponse;
 import recruit.saas.common.rest.CommonResultCode;
 import recruit.saas.gateway.component.JWTParser;
 import recruit.saas.gateway.props.JWTSkipAuthProperties;
@@ -38,7 +31,7 @@ import java.util.Optional;
  */
 @Slf4j
 @Component
-public class JWTAuthFilter implements GlobalFilter, Ordered {
+public class JWTAuthFilter implements GlobalFilter, Ordered, WriteErrorResponseFilter {
     @Resource
     private JWTSkipAuthProperties skipAuthProperties;
 
@@ -49,6 +42,7 @@ public class JWTAuthFilter implements GlobalFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+        log.info("JWTAuthFilter#filter");
         //对于需要跳过鉴权的请求,直接放行
         String path = exchange.getRequest().getURI().getPath();
         Optional<String> excluded = Optional.ofNullable(skipAuthProperties.getUrls())
@@ -85,22 +79,7 @@ public class JWTAuthFilter implements GlobalFilter, Ordered {
     //配置过滤器优先级,order数字越小,优先级越高
     @Override
     public int getOrder() {
-        return 0;
-    }
-
-    //写回错误信息
-    private Mono<Void> writeErrorResponse(ServerWebExchange exchange, CommonBusinessException exception) {
-        //构造json类型的通用异常响应
-        ServerHttpResponse response = exchange.getResponse();
-        CommonRestResponse<?> result = CommonRestResponse.ofBusinessException(exception);
-        response.setStatusCode(HttpStatus.OK);
-        response.getHeaders().add(HttpHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_JSON_VALUE);  //Content-Type=application/json
-        String jsonBody = new Gson().toJson(result);
-
-        //写回response
-        DataBuffer dataBuffer = response.bufferFactory()
-                .wrap(jsonBody.getBytes(StandardCharsets.UTF_8));
-        return response.writeWith(Mono.just(dataBuffer));
+        return 1;
     }
 
     //根据JWT Token 解析用户信息,并写入Request Header

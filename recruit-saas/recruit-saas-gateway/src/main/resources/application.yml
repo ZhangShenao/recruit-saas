@@ -16,16 +16,16 @@ spring:
           enabled: true #开启动态路由,可以根据服务名从注册中心获取到服务实例
 
       #跨域配置
-#      globalcors:
-#        cors-configurations:
-#          '[/**]': #匹配请求路径
-#            allowed-origin-patterns: *  #授信地址列表
-#            #Cookie、Header等认证信息
-#            allowed-methods: "*"
-#            allow-credentials: true
-#            exposed-headers: "*"
-#            allowed-headers: "*"
-#            max-age: 1000 #浏览器缓存时间
+  #      globalcors:
+  #        cors-configurations:
+  #          '[/**]': #匹配请求路径
+  #            allowed-origin-patterns: *  #授信地址列表
+  #            #Cookie、Header等认证信息
+  #            allowed-methods: "*"
+  #            allow-credentials: true
+  #            exposed-headers: "*"
+  #            allowed-headers: "*"
+  #            max-age: 1000 #浏览器缓存时间
 
 
   profiles:

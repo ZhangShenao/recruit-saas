@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import recruit.saas.auth.service.bo.SMSCodeParamBO;
 import recruit.saas.auth.service.param.SendSMSCodeParam;
 import recruit.saas.auth.service.service.SMSService;
-import recruit.saas.auth.service.utils.IPUtils;
+import recruit.saas.common.utils.IPUtils;
 import recruit.saas.common.enums.RedisKeys;
 import recruit.saas.common.rest.CommonRestResponse;
 
