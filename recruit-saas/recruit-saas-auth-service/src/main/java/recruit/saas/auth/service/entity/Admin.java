@@ -1,7 +1,7 @@
-package recruit.saas.entity;
+package recruit.saas.auth.service.entity;
 
-import java.time.LocalDateTime;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * <p>
