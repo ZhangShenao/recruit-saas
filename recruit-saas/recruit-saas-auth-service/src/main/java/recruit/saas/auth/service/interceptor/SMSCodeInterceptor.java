@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-import recruit.saas.auth.service.utils.IPUtils;
+import recruit.saas.common.utils.IPUtils;
 import recruit.saas.common.enums.RedisKeys;
 import recruit.saas.common.exception.CommonBusinessException;
 import recruit.saas.common.rest.CommonResultCode;

@@ -6,7 +6,7 @@ spring:
       config:
         # nacos config服务器的地址
         server-addr: remote-centos:8848
-        file-extension: yml
+        file-extension: yaml
         # prefix: 文件名前缀，默认是spring.application.name
         # 如果没有指定命令空间，则默认命令空间为PUBLIC
         namespace: 166004f2-bd1e-4d70-aa0d-0b929a1e28b2
@@ -24,6 +24,9 @@ spring:
         refresh-enabled: true
         # Nacos的扩展配置项，数字越大优先级越高
         extension-configs:
-          - dataId: jwt.yaml  #JWT配置
+          - data-id: jwt.yaml  #JWT配置
             group: JWT_GROUP
+            refresh: true
+          - data-id: ip_limit.yaml  #IP限流配置
+            group: IP_LIMIT_GROUP
             refresh: true

@@ -1,8 +1,8 @@
-package recruit.saas.auth.service.utils;
+package recruit.saas.common.utils;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.server.ServerHttpRequest;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;

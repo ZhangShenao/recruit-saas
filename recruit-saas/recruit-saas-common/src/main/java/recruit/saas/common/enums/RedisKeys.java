@@ -16,6 +16,10 @@ public enum RedisKeys {
     //二维码相关
     QR_TOKEN_USAGE_FLAG("auth:qr:token:usage:%s", "SaaS端二维码使用Token标记", false, 60L * 5),
 
+    //IP限流相关
+    IP_DENY_FLAG("ip:deny:%s", "IP限流标识", true, -1),
+    IP_VISIT_COUNT("ip:visit:count:%s", "IP访问次数", true, -1),
+
     ;
     private String key; //key
     private String desc;    //描述
