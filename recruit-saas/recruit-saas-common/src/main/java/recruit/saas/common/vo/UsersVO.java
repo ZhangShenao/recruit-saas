@@ -38,4 +38,9 @@ public class UsersVO {
      * 身份角色，1: 求职者，2: 求职者可以切换为HR进行招聘，同时拥有两个身份
      */
     private Integer role;
+
+    /**
+     * JWT登录Token
+     */
+    private String token;
 }

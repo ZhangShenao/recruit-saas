@@ -11,10 +11,8 @@ import recruit.saas.auth.service.component.JWTGenerator;
 import recruit.saas.auth.service.entity.Admin;
 import recruit.saas.auth.service.param.AdminLoginParam;
 import recruit.saas.auth.service.service.AdminService;
-import recruit.saas.auth.service.vo.AdminVO;
-import recruit.saas.common.enums.JWTPlatformType;
+import recruit.saas.common.vo.AdminVO;
 import recruit.saas.common.rest.CommonRestResponse;
-import recruit.saas.common.rest.CommonResultCode;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;

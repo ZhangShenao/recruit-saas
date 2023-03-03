@@ -1,4 +1,4 @@
-package recruit.saas.auth.service.vo;
+package recruit.saas.common.vo;
 
 import lombok.Data;
 
