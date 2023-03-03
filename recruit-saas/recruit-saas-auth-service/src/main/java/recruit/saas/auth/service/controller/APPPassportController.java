@@ -70,10 +70,11 @@ public class APPPassportController {
         //登录成功,返回用户信息
         UsersVO vo = usersAssembler.usersEntity2VO(users);
 
-        //生成JWT Token,并写入Response Header
+        //生成JWT Token
         String payload = new Gson().toJson(vo);
         String token = jwtGenerator.generateTokenWithExpirationAndPrefix(payload, JWTPlatformType.APP.getTokenPrefix(), 60L * 60, TimeUnit.SECONDS);
-        response.addHeader(JWTPlatformType.TOKEN_HEADER_KEY, token);
+        vo.setToken(token);
+
         return CommonRestResponse.success(vo);
     }
 

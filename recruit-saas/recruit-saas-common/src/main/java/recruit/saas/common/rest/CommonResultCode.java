@@ -28,6 +28,16 @@ public enum CommonResultCode {
     ONLY_HR_CAN_LOGIN(3006, false, "该登录功能仅针对HR角色开放~"),
     USERNAME_OR_PASSWORD_ERROR(3007, false, "用户名或密码错误，请确认后重试~"),
 
+    //管理后台相关
+    ASSIGN_ADMIN_FAIL(4001, false, "分配管理员账号失败，请稍后重试~"),
+    ADMIN_USERNAME_ALREADY_EXISTED(4002, false, "管理员用户名已经存在，请修改后重试~"),
+    DELETE_ADMIN_FAIL(4003, false, "删除管理员账号失败，请稍后重试~"),
+    PASSWORD_MUST_BE_DIFFERENT(4004, false, "新旧密码不能相同，请修改后重试~"),
+    PASSWORD_NOT_SAME(4005, false, "两次输入密码不一致，请修改后重试~"),
+    ORIGIN_PASSWORD_ERROR(4006, false, "原始密码错误，请修改后重试~"),
+    ADMIN_NOT_EXISTS(4007, false, "管理员账号不存在，请确认后重试~"),
+    RESET_PASSWORD_FAIL(4008, false, "重置管理员密码失败，请稍后重试~"),
+
     ;
     private int status; //状态码
 

@@ -3,7 +3,7 @@ package recruit.saas.auth.service.assembler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import recruit.saas.auth.service.entity.Admin;
-import recruit.saas.auth.service.vo.AdminVO;
+import recruit.saas.common.vo.AdminVO;
 
 /**
  * @author ZhangShenao
