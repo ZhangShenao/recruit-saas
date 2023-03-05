@@ -91,5 +91,10 @@
             <version>0.11.5</version>
             <scope>runtime</scope>
         </dependency>
+        <!--Spring 重试机制-->
+        <dependency>
+            <groupId>org.springframework.retry</groupId>
+            <artifactId>spring-retry</artifactId>
+        </dependency>
     </dependencies>
 </project>
