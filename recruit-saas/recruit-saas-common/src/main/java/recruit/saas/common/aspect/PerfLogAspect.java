@@ -25,7 +25,8 @@ public class PerfLogAspect {
         stopWatch.start(signature);
         Object result = joinPoint.proceed();
         stopWatch.stop();
-        log.info("Exec {}, cost: {}ms", stopWatch.getLastTaskName(), stopWatch.getTotalTimeMillis());
+        StopWatch.TaskInfo task = stopWatch.getLastTaskInfo();
+        log.info("Exec {}, cost: {}ms", task.getTaskName(), task.getTimeMillis());
         return result;
     }
 }
