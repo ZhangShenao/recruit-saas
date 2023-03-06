@@ -32,6 +32,7 @@ import static recruit.saas.common.enums.RedisKeys.*;
 @RequestMapping("/sms")
 @Slf4j
 public class SMSController {
+    private static final String VERIFY_CODE_TEMPLATE_ID = "SMS_270955110";  //短信验证码模板ID
     @Resource
     private SMSService smsService;
 
@@ -51,14 +52,12 @@ public class SMSController {
         p.setCode(code);
 
         //发送短信
-        boolean succ = smsService.sendSMS(mobile, "SMS_270955110", new Gson().toJson(p));
-        log.info("Send SMS Code. mobile: {}, code: {}, result: {}", mobile, code, succ);
-        if (succ) {
-            //发送短信成功,设置验证码锁标识,避免重复发送验证码
-            String ip = IPUtils.getRequestIp(request);
-            String lockKey = String.format(RedisKeys.SMS_CODE_IP_LOCK.getKey(), ip);
-            stringRedisTemplate.opsForValue().set(lockKey, SMS_CODE_LOCK_FLAG, SMS_CODE_IP_LOCK.getTtlInSec(), TimeUnit.SECONDS);
-        }
+        smsService.sendSMSAsync(mobile, VERIFY_CODE_TEMPLATE_ID, new Gson().toJson(p));
+        log.info("Send SMS Code. mobile: {}, code: {}", mobile, code);
+        //设置验证码锁标识,避免重复发送验证码
+        String ip = IPUtils.getRequestIp(request);
+        String lockKey = String.format(RedisKeys.SMS_CODE_IP_LOCK.getKey(), ip);
+        stringRedisTemplate.opsForValue().set(lockKey, SMS_CODE_LOCK_FLAG, SMS_CODE_IP_LOCK.getTtlInSec(), TimeUnit.SECONDS);
         return CommonRestResponse.success(code);
     }
 }
