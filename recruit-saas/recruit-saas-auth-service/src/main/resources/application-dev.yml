@@ -31,6 +31,13 @@ spring:
         max-idle: 8
         max-active: 8
         min-idle: 0
+  #RabbitMQ配置
+  rabbitmq:
+    host: remote-centos
+    port: 5672
+    username: zsa
+    password: 123456
+    virtual-host: recruit-saas
 
 #MyBatis Plus配置
 mybatis-plus:

@@ -2,6 +2,7 @@ package recruit.saas.auth.service.bo;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import lombok.Builder;
 import lombok.Data;
 
 /**
@@ -10,6 +11,7 @@ import lombok.Data;
  * Description 短信验证码参数
  */
 @Data
+@Builder
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class SMSCodeParamBO {
     private String code;    //验证码

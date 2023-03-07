@@ -3,12 +3,15 @@ package recruit.saas.auth.service.controller;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import recruit.saas.auth.service.bo.SMSCodeParamBO;
+import recruit.saas.auth.service.bo.SendSMSBO;
+import recruit.saas.auth.service.config.SMSRabbitMQConfig;
 import recruit.saas.auth.service.param.SendSMSCodeParam;
 import recruit.saas.auth.service.service.SMSService;
 import recruit.saas.common.utils.IPUtils;
@@ -39,6 +42,9 @@ public class SMSController {
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 
+    @Resource
+    private RabbitTemplate rabbitTemplate;
+
     @PostMapping("/code/send")
     public CommonRestResponse<?> sendSMSCode(@Valid @RequestBody SendSMSCodeParam param, HttpServletRequest request) {
         //随机生成短信验证码
@@ -48,16 +54,28 @@ public class SMSController {
         //将验证码保存至Redis,并设置有效期
         String key = String.format(SMS_CODE.getKey(), mobile);
         stringRedisTemplate.opsForValue().set(key, code, SMS_CODE.getTtlInSec(), TimeUnit.SECONDS);
-        SMSCodeParamBO p = new SMSCodeParamBO();
-        p.setCode(code);
 
-        //发送短信
-        smsService.sendSMSAsync(mobile, VERIFY_CODE_TEMPLATE_ID, new Gson().toJson(p));
+
+        //通过RabbitMQ发送短信
+        sendMQMessage(mobile, code);
         log.info("Send SMS Code. mobile: {}, code: {}", mobile, code);
+
         //设置验证码锁标识,避免重复发送验证码
         String ip = IPUtils.getRequestIp(request);
         String lockKey = String.format(RedisKeys.SMS_CODE_IP_LOCK.getKey(), ip);
         stringRedisTemplate.opsForValue().set(lockKey, SMS_CODE_LOCK_FLAG, SMS_CODE_IP_LOCK.getTtlInSec(), TimeUnit.SECONDS);
         return CommonRestResponse.success(code);
+    }
+
+    private void sendMQMessage(String mobile, String code) {
+        SMSCodeParamBO p = SMSCodeParamBO.builder()
+                .code(code)
+                .build();
+        SendSMSBO sendSMSBO = SendSMSBO.builder()
+                .mobile(mobile)
+                .templateId(VERIFY_CODE_TEMPLATE_ID)
+                .templateParamJson(new Gson().toJson(p))
+                .build();
+        rabbitTemplate.convertAndSend(SMSRabbitMQConfig.EXCHANGE_NAME, "recruit.saas.sms.send", new Gson().toJson(sendSMSBO));
     }
 }
