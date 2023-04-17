@@ -37,7 +37,7 @@ public class SMSRabbitMQConfig {
         return BindingBuilder
                 .bind(smsQueue())
                 .to(smsExchange())
-                .with("recruit.saas.sms.#")
+                .with("recruit.saas.sms.#") //设置路由key
                 .noargs();
     }
 }

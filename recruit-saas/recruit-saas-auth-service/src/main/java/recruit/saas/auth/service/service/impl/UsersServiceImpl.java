@@ -1,9 +1,12 @@
 package recruit.saas.auth.service.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import recruit.saas.api.resume.ResumeAPI;
 import recruit.saas.auth.service.entity.Users;
 import recruit.saas.auth.service.mapper.UsersMapper;
 import recruit.saas.auth.service.service.UsersService;
@@ -11,6 +14,7 @@ import recruit.saas.common.constants.UsersConstants;
 import recruit.saas.common.enums.Sex;
 import recruit.saas.common.enums.UsersRole;
 import recruit.saas.common.enums.UsersShowWhichName;
+import recruit.saas.common.rest.CommonRestResponse;
 import recruit.saas.common.utils.DateTimeUtils;
 import recruit.saas.common.utils.DesensitizationUtils;
 
@@ -29,6 +33,9 @@ import java.util.Optional;
 public class UsersServiceImpl implements UsersService {
     @Resource
     private UsersMapper usersMapper;
+
+    @Resource
+    private ResumeAPI resumeAPI;
 
     @Override
     public Optional<Users> queryByMobile(String mobile) {
@@ -69,7 +76,13 @@ public class UsersServiceImpl implements UsersService {
         entity.setUpdatedTime(now);
 
         //创建用户并返回
-        usersMapper.insert(entity);
+        int row = usersMapper.insert(entity);
+
+        //创建用户成功,初始化简历
+        if (row > 0 && StringUtils.isNotBlank(entity.getId())) {
+            CommonRestResponse<String> rest = resumeAPI.initResume(entity.getId());
+            log.info("Init User Resume Result: {}", new Gson().toJson(rest));
+        }
         return entity;
     }
 }
