@@ -15,6 +15,7 @@
         <module>recruit-saas-generator</module>
         <module>recruit-saas-gateway</module>
         <module>recruit-saas-auth-service</module>
+        <module>recruit-saas-work-service</module>
     </modules>
 
     <!--root pom,管理所有子module的依赖和属性,不参与打包-->

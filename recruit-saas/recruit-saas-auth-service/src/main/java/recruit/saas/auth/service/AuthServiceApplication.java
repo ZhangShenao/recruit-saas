@@ -5,6 +5,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.retry.annotation.EnableRetry;
 import org.springframework.scheduling.annotation.EnableAsync;
 
@@ -19,6 +20,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @Slf4j
 @EnableRetry    //开启重试机制
 @EnableAsync    //开启异步处理机制
+@EnableFeignClients("recruit.saas.auth.service.feign")    //开启OpenFeign远程调用
 public class AuthServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(AuthServiceApplication.class, args);
