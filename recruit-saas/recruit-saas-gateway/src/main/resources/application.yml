@@ -15,7 +15,13 @@ spring:
         locator:
           enabled: true #开启动态路由,可以根据服务名从注册中心获取到服务实例
 
-      #跨域配置
+
+    #开启Nacos负载均衡策略(基于Nacos服务权重)
+    loadbalancer:
+      nacos:
+        enabled: true
+
+        #跨域配置
   #      globalcors:
   #        cors-configurations:
   #          '[/**]': #匹配请求路径
