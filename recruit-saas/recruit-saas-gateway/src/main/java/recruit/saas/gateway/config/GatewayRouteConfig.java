@@ -36,6 +36,14 @@ public class GatewayRouteConfig {
                                 .path("/gateway/auth/**")
                                 .filters(f -> f.stripPrefix(1))
                                 .uri("lb://recruit-saas-auth-service")
-                ).build();
+                )
+                .route("work-service-router",
+                        route -> route
+                                .order(1)
+                                .path("/gateway/work/**")
+                                .filters(f -> f.stripPrefix(1))
+                                .uri("lb://recruit-saas-work-service")
+                )
+                .build();
     }
 }
