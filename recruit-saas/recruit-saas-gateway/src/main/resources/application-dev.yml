@@ -3,7 +3,7 @@ spring:
     #Nacos服务注册与发现配置
     nacos:
       discovery:
-        server-addr: remote-centos:8848/   #设置Nacos注册中心地址
+        server-addr: 127.0.0.1:8848,127.0.0.1:8948,127.0.0.1:9048   #设置Nacos注册中心地址
         namespace: 166004f2-bd1e-4d70-aa0d-0b929a1e28b2   #设置Nacos服务namespace
 
   #Redis数据源配置
